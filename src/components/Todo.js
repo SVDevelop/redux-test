@@ -20,6 +20,7 @@ export default function Todo ({todo}) {
         }
     }
     const { selected, done, text, id } = todo
+
     return (
         <li>
             <input
@@ -32,7 +33,11 @@ export default function Todo ({todo}) {
 
             />
             <label htmlFor="check">
-                <input type='text' onClick={changeValue} value={text} onChange={(e)=>dispatch(updateTodo(id, e.target.value))} />
+                {
+                    !done ?
+                        <input className="todo__title" type='text' onClick={changeValue} value={text} onChange={(e)=>dispatch(updateTodo(id, e.target.value))} /> :
+                        <span className="todo__title done">{text}</span>
+                }
             </label>
 
 
