@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function AddTodo (props) {
-    return <input type="text" {...props} value={props.value} onChange={props.change}/>
+    return <input type="text" onKeyUp={props.onKeyUp} value={props.value} onChange={props.onChange}/>
 }
