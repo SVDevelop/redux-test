@@ -1,4 +1,4 @@
-import {ADD, DELETE, UPDATE, SELECTED, DELETE_SELECTED, DONE_SELECTED} from "./bollerplate";
+import {ADD, DELETE, UPDATE, SELECTED, SELECTED_ALL, DONE, DELETE_SELECTED, DONE_SELECTED} from "./bollerplate";
 import { v4 as uuid } from 'uuid'
 
 
@@ -27,8 +27,17 @@ export const selectTodo = (id) => ({
     }
 })
 
+export const selectAllTodo = (checked) => ({type: SELECTED_ALL, payload: checked})
+
 export const deleteTodo = (id) => ({
     type: DELETE,
+    payload: {
+        id
+    }
+})
+
+export const doneTodo = (id) => ({
+    type: DONE,
     payload: {
         id
     }
@@ -41,3 +50,4 @@ export const deleteTodoSelected = () => ({
 export const doneTodoSelected = () => ({
     type: DONE_SELECTED,
 })
+

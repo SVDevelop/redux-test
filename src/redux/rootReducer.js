@@ -1,11 +1,11 @@
 import {combineReducers} from "redux";
-import {ADD, UPDATE, DELETE, SELECTED, DELETE_SELECTED, DONE_SELECTED} from "./bollerplate";
+import {ADD, UPDATE, DELETE, SELECTED, SELECTED_ALL, DONE, DELETE_SELECTED, DONE_SELECTED } from "./bollerplate";
 
 // function initialState() {
 //     return {todos: []}
 // }
 const initTodoState = {
-    todosList: [] //{id: 1, todo: "dasdas", selected: false, done: false}
+    todosList: [] //{id: 1, todo: "dasdas", selected: false, done: false, filtersVisible: true}
 };
 
 export const rootReducer = combineReducers({
@@ -41,10 +41,32 @@ function todoReducer (state = initTodoState, action ) {
                     selected: !todo.selected
                 })
             }
+        case SELECTED_ALL: {
+            if (!action.payload) {
+                return {
+                    ...state,
+                    todosList: state.todosList.map(todo => todo.selected ? todo : {...todo, selected: true})
+                }
+            } else {
+                return {
+                    ...state,
+                    todosList: state.todosList.map(todo => !todo.selected ? todo : {...todo, selected: false})
+                }
+            }
+        }
+
         case DELETE:
             return {
                 ...state,
                 todosList: state.todosList.filter(todo => todo.id !== action.payload.id)
+            }
+        case DONE:
+            return {
+                ...state,
+                todosList: state.todosList.map(todo => todo.id === action.payload.id ? {
+                    ...todo,
+                    done: true
+                } : todo)
             }
         case DELETE_SELECTED:
             return {

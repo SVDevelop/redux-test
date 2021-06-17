@@ -22,9 +22,9 @@ export default function Todo ({todo}) {
     const { selected, done, text, id } = todo
 
     return (
-        <li>
+        <li className={"todo-list__item"}>
             <input
-                id='check'
+                id={`check_${id}`}
                 type="checkbox"
                 checked={selected}
                 onChange={()=> {
@@ -32,10 +32,10 @@ export default function Todo ({todo}) {
                 }}
 
             />
-            <label htmlFor="check">
+            <label htmlFor={`check_${id}`}>
                 {
                     !done ?
-                        <input className="todo__title" type='text' onClick={changeValue} value={text} onChange={(e)=>dispatch(updateTodo(id, e.target.value))} /> :
+                        <input className="todo__title" type='text' onClick={changeValue} value={text} onChange={(e) => dispatch(updateTodo(id, e.target.value))} /> :
                         <span className="todo__title done">{text}</span>
                 }
             </label>
@@ -45,3 +45,4 @@ export default function Todo ({todo}) {
     </li>
     )
 }
+//
